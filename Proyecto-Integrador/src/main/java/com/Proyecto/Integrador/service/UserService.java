@@ -1,14 +1,14 @@
 package com.Proyecto.Integrador.service;
 
-import com.Proyecto.Integrador.repository.User;
+import com.Proyecto.Integrador.dto.UserDto;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
-    User save(User user);
-    Optional<User> findById(String id);
-    List<User> all();
+    UserDto save(UserDto user);
+    Optional<UserDto> findById(String id);
+    List<UserDto> all();
     void deleteById(String id);
-    User update(User user, String userId);
+    UserDto update(UserDto user, String userId);
 }

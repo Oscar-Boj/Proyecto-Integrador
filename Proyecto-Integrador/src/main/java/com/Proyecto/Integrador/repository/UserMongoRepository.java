@@ -1,6 +1,9 @@
 package com.Proyecto.Integrador.repository;
 
-import java.util.Optional;
+import com.Proyecto.Integrador.entity.UserMongoEntity;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
-public interface UserMongoEntity extends MongoRepository<UserMongoEntity, String>{
+@Repository
+public interface UserMongoRepository extends MongoRepository<UserMongoEntity, String> {
 }
