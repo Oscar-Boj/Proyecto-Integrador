@@ -1,2 +1,6 @@
-package com.Proyecto.Integrador.util;public enum Role {
+package com.Proyecto.Integrador.util;
+
+public enum Role {
+    ADMIN,
+    USER
 }
