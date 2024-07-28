@@ -32,7 +32,7 @@ public class JwtService {
                 .signWith(getKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
-    private Key getKey() {
+    Key getKey() {
         byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
         return Keys.hmacShaKeyFor(keyBytes);
     }
@@ -43,7 +43,7 @@ public class JwtService {
         final String username = getUsernameFromToken(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
-    private Claims getAllClaims(String token) {
+    Claims getAllClaims(String token) {
         return Jwts
                 .parserBuilder()
                 .setSigningKey(getKey())
@@ -55,10 +55,10 @@ public class JwtService {
         final Claims claims = getAllClaims(token);
         return claimsResolver.apply(claims);
     }
-    private Date getExpiration(String token) {
+    Date getExpiration(String token) {
         return getClaim(token, Claims::getExpiration);
     }
-    private boolean isTokenExpired(String token) {
+    boolean isTokenExpired(String token) {
         return getExpiration(token).before(new Date());
     }
 }

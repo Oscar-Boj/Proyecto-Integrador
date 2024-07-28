@@ -20,12 +20,19 @@ public class AuthController {
     @PostMapping(value = "login")
     public ResponseEntity<AuthDto> Login(@RequestBody LoginDto login){
         AuthDto authDto = this.authService.login(login);
+        if (authDto == null) {
+            return ResponseEntity.status(401).build(); // Unauthorized
+        }
         return ResponseEntity.ok(authDto);
     }
 
     @PostMapping("/register")
     public ResponseEntity<AuthDto> register(@RequestBody RegisterDto dto){
-        AuthDto authDto = this.authService.register(dto);
-        return ResponseEntity.ok(authDto);
+        try {
+            AuthDto authDto = this.authService.register(dto);
+            return ResponseEntity.ok(authDto);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(400).body(new AuthDto(e.getMessage()));
+        }
     }
 }
